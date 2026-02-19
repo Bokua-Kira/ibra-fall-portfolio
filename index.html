@@ -158,6 +158,11 @@
             text-decoration: none;
             font-size: 0.9em;
             font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .project-links a:hover {
+            text-decoration: underline;
         }
         
         /* Compétences */
@@ -245,6 +250,11 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
+        .contact-item a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
         /* Footer */
         footer {
             background: #333;
@@ -253,11 +263,145 @@
             padding: 30px 0;
         }
         
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            overflow: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+            position: relative;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .close-modal {
+            position: absolute;
+            right: 25px;
+            top: 15px;
+            color: #666;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: #667eea;
+        }
+        
+        .modal-title {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-right: 30px;
+        }
+        
+        .readme-content {
+            line-height: 1.8;
+            color: #444;
+        }
+        
+        .readme-content h1 {
+            color: #333;
+            font-size: 1.8em;
+            margin: 25px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e7ff;
+        }
+        
+        .readme-content h2 {
+            color: #667eea;
+            font-size: 1.4em;
+            margin: 20px 0 10px 0;
+            text-align: left;
+        }
+        
+        .readme-content h3 {
+            color: #555;
+            font-size: 1.2em;
+            margin: 15px 0 10px 0;
+        }
+        
+        .readme-content p {
+            margin: 10px 0;
+        }
+        
+        .readme-content ul, .readme-content ol {
+            margin: 10px 0 20px 30px;
+        }
+        
+        .readme-content li {
+            margin: 5px 0;
+        }
+        
+        .readme-content code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        .readme-content pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .tech-stack-modal {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .tech-tag-modal {
+            background: #e0e7ff;
+            color: #667eea;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             header h1 { font-size: 2em; }
             nav ul { flex-direction: column; align-items: center; }
             nav ul li { margin: 10px 0; }
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -292,7 +436,7 @@
         <div class="container">
             <h2>Mes Projets</h2>
             
-            <!-- Projet professionnel -->
+            <!-- Projet professionnel (Teranga Market - SANS README) -->
             <div class="project-card" style="margin-bottom: 30px;">
                 <div class="project-content">
                     <div class="project-title">Teranga Market - E-commerce</div>
@@ -305,15 +449,13 @@
                     <div class="project-desc">
                         Développement d'une plateforme e-commerce complète avec intégration de paiement, gestion de panier en temps réel et tableau de bord administrateur. Optimisation des performances et réduction des temps de chargement de 40%.
                     </div>
-                    <div class="project-links">
-                        <a href="#">Voir sur GitHub →</a>
-                    </div>
+                    <!-- Pas de lien "Voir sur GitHub" -->
                 </div>
             </div>
             
-            <!-- Grille des projets académiques -->
+            <!-- Grille des projets académiques (AVEC README) -->
             <div class="projects-grid">
-                <!-- Projet 1 -->
+                <!-- Projet 1 : Analyse des ventes -->
                 <div class="project-card">
                     <div class="project-content">
                         <div class="project-title">Analyse des ventes & Optimisation des stocks</div>
@@ -327,12 +469,12 @@
                             Analyse de 50 000+ transactions avec Pandas/NumPy. Création d'algorithmes de réapprovisionnement automatique sous Django. Réduction des ruptures de stock de 25%.
                         </div>
                         <div class="project-links">
-                            <a href="#">Détails →</a>
+                            <a onclick="openModal('modal1')">📖 Lire le README →</a>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Projet 2 -->
+                <!-- Projet 2 : Modélisation prédictive -->
                 <div class="project-card">
                     <div class="project-content">
                         <div class="project-title">Modélisation prédictive académique</div>
@@ -345,12 +487,12 @@
                             Modèles ML pour prédire les résultats étudiants avec 85% de précision. Interface de visualisation Django pour l'exploration des prédictions.
                         </div>
                         <div class="project-links">
-                            <a href="#">Détails →</a>
+                            <a onclick="openModal('modal2')">📖 Lire le README →</a>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Projet 3 -->
+                <!-- Projet 3 : Étude du trafic routier -->
                 <div class="project-card">
                     <div class="project-content">
                         <div class="project-title">Étude du trafic routier</div>
@@ -364,12 +506,12 @@
                             Analyse statistique des données de trafic à Dakar. Identification des goulots d'étranglement et proposition d'optimisation des flux via Django.
                         </div>
                         <div class="project-links">
-                            <a href="#">Détails →</a>
+                            <a onclick="openModal('modal3')">📖 Lire le README →</a>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Projet 4 -->
+                <!-- Projet 4 : Prévision épidémiologique -->
                 <div class="project-card">
                     <div class="project-content">
                         <div class="project-title">Prévision épidémiologique</div>
@@ -383,7 +525,7 @@
                             Modélisation de séries temporelles avec ARIMA et LSTM. Dashboard interactif Django avec Chart.js pour le suivi des prévisions.
                         </div>
                         <div class="project-links">
-                            <a href="#">Détails →</a>
+                            <a onclick="openModal('modal4')">📖 Lire le README →</a>
                         </div>
                     </div>
                 </div>
@@ -470,7 +612,7 @@
                     ✉️ fall-3950193@bemtech.sn
                 </div>
                 <div class="contact-item">
-                    🔗 <a href="https://www.linkedin.com/in/ibra-fall-99a2192a4/" style="color: #667eea;">LinkedIn</a>
+                    🔗 <a href="https://www.linkedin.com/in/ibra-fall-99a2192a4/">LinkedIn</a>
                 </div>
             </div>
         </div>
@@ -481,5 +623,382 @@
             <p>&copy; 2026 Ibra Fall - Développeur Python/Django. Tous droits réservés.</p>
         </div>
     </footer>
+
+    <!-- MODAL 1 : Analyse des ventes -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('modal1')">&times;</span>
+            <h1 class="modal-title">📊 Analyse des ventes & Optimisation des stocks</h1>
+            
+            <div class="tech-stack-modal">
+                <span class="tech-tag-modal">Python 3.10</span>
+                <span class="tech-tag-modal">Pandas</span>
+                <span class="tech-tag-modal">NumPy</span>
+                <span class="tech-tag-modal">Django 4.2</span>
+                <span class="tech-tag-modal">PostgreSQL</span>
+                <span class="tech-tag-modal">Scikit-learn</span>
+            </div>
+            
+            <div class="readme-content">
+                <h1>Projet d'Analyse des Ventes et Optimisation des Stocks</h1>
+                
+                <h2>📋 Contexte du projet</h2>
+                <p>Ce projet a été développé pour un supermarché cherchant à réduire ses coûts de stockage et éviter les ruptures de produits. L'objectif était d'analyser 50 000+ transactions pour identifier les tendances d'achat et créer un système de réapprovisionnement intelligent.</p>
+                
+                <h2>🎯 Objectifs</h2>
+                <ul>
+                    <li>Analyser les ventes par catégorie, période et zone géographique</li>
+                    <li>Identifier les produits saisonniers et les tendances</li>
+                    <li>Créer un algorithme de réapprovisionnement automatique</li>
+                    <li>Développer un dashboard pour visualiser les indicateurs clés</li>
+                    <li>Réduire les ruptures de stock de 25%</li>
+                </ul>
+                
+                <h2>🛠️ Architecture technique</h2>
+                <pre>
+├── data/
+│   ├── raw/              # Données brutes (CSV)
+│   ├── processed/        # Données nettoyées
+│   └── samples/          # Échantillons pour tests
+├── notebooks/
+│   ├── 01_eda.ipynb      # Analyse exploratoire
+│   └── 02_modeling.ipynb # Modélisation
+├── django_app/
+│   ├── dashboard/        # Visualisations
+│   ├── api/              # API REST
+│   └── templates/        # Interface HTML
+└── scripts/
+    ├── clean_data.py     # Nettoyage
+    └── forecast.py       # Prévisions
+                </pre>
+                
+                <h2>🔍 Analyse des données</h2>
+                <h3>Étape 1 : Nettoyage avec Pandas</h3>
+                <pre>
+import pandas as pd
+import numpy as np
+
+# Chargement des données
+df = pd.read_csv('ventes_supermarche.csv')
+print(f"Dimensions: {df.shape}")
+print(f"Colonnes: {df.columns.tolist()}")
+
+# Nettoyage
+df = df.drop_duplicates()
+df['date_vente'] = pd.to_datetime(df['date_vente'])
+df = df.dropna(subset=['prix_unitaire', 'quantite'])
+
+# Création de features
+df['chiffre_affaires'] = df['prix_unitaire'] * df['quantite']
+df['mois'] = df['date_vente'].dt.month
+df['jour_semaine'] = df['date_vente'].dt.dayofweek
+                </pre>
+                
+                <h3>Étape 2 : Analyse exploratoire</h3>
+                <pre>
+# Top 10 des produits les plus vendus
+top_produits = df.groupby('produit')['quantite'].sum()\
+                 .sort_values(ascending=False).head(10)
+
+# Ventes par heure de la journée
+ventes_par_heure = df.groupby(df['date_vente'].dt.hour)['quantite'].sum()
+
+# Corrélation entre variables
+correlations = df[['quantite', 'prix_unitaire', 'chiffre_affaires']].corr()
+                </pre>
+                
+                <h2>🤖 Algorithmes de réapprovisionnement</h2>
+                <pre>
+class ReapprovisionnementOptimise:
+    def __init__(self, df_ventes, stock_actuel):
+        self.df_ventes = df_ventes
+        self.stock = stock_actuel
+        self.seuil_rupture = 10  # Stock minimum avant réappro
+    
+    def calculer_ventes_moyennes(self, produit, periode=7):
+        """Calcule la moyenne des ventes sur X jours"""
+        ventes_produit = self.df_ventes[
+            self.df_ventes['produit'] == produit
+        ]
+        return ventes_produit['quantite'].tail(periode).mean()
+    
+    def predire_rupture(self, produit):
+        """Prédit si un produit va être en rupture"""
+        stock_actuel = self.stock.get(produit, 0)
+        ventes_journalieres = self.calculer_ventes_moyennes(produit)
+        
+        if ventes_journalieres > 0:
+            jours_restants = stock_actuel / ventes_journalieres
+            return jours_restants < 3  # Alerte si moins de 3 jours
+        return False
+    
+    def commander(self, produit):
+        """Calcule la quantité à commander"""
+        ventes_7j = self.calculer_ventes_moyennes(produit, 7)
+        ventes_30j = self.calculer_ventes_moyennes(produit, 30)
+        
+        # Poids plus important sur les ventes récentes
+        ventes_prevues = (ventes_7j * 0.7) + (ventes_30j * 0.3)
+        
+        # Commander pour 15 jours + stock de sécurité
+        quantite = (ventes_prevues * 15) * 1.2  # 20% de marge
+        
+        return int(quantite)
+                </pre>
+                
+                <h2>📈 Interface Django</h2>
+                <h3>Vue principale</h3>
+                <pre>
+from django.shortcuts import render
+from django.http import JsonResponse
+from .models import Vente, Produit, Stock
+from .utils import ReapprovisionnementOptimise
+
+def dashboard(request):
+    # Récupérer les données
+    ventes = Vente.objects.select_related('produit').all()
+    stocks = {s.produit.nom: s.quantite for s in Stock.objects.all()}
+    
+    # Initialiser l'algorithme
+    reappro = ReapprovisionnementOptimise(ventes, stocks)
+    
+    # Identifier les produits à risque
+    produits_risque = []
+    for produit in Produit.objects.all():
+        if reappro.predire_rupture(produit.nom):
+            produits_risque.append({
+                'nom': produit.nom,
+                'stock_actuel': stocks.get(produit.nom, 0),
+                'a_commander': reappro.commander(produit.nom)
+            })
+    
+    context = {
+        'total_ventes': ventes.count(),
+        'chiffre_affaires': sum(v.chiffre_affaires for v in ventes),
+        'produits_risque': produits_risque,
+        'top_produits': get_top_produits(ventes)
+    }
+    
+    return render(request, 'dashboard.html', context)
+                </pre>
+                
+                <h2>📊 Résultats obtenus</h2>
+                <ul>
+                    <li><strong>25% de réduction</strong> des ruptures de stock</li>
+                    <li><strong>15% d'optimisation</strong> des coûts de stockage</li>
+                    <li><strong>Dashboard interactif</strong> avec mise à jour en temps réel</li>
+                    <li><strong>Précision des prévisions</strong> : 87% sur 7 jours</li>
+                    <li><strong>Traitement de 50 000+ transactions</strong> en moins de 2 secondes</li>
+                </ul>
+                
+                <h2>🚀 Améliorations futures</h2>
+                <ul>
+                    <li>Intégration de l'apprentissage profond (LSTM) pour meilleures prévisions</li>
+                    <li>API pour connexion directe avec les fournisseurs</li>
+                    <li>Application mobile pour les gestionnaires de stock</li>
+                    <li>Prise en compte des promotions et événements spéciaux</li>
+                </ul>
+                
+                <h2>🔗 Liens utiles</h2>
+                <ul>
+                    <li><a href="#">Code source sur GitHub</a></li>
+                    <li><a href="#">Démonstration en ligne</a></li>
+                    <li><a href="#">Rapport d'analyse complet (PDF)</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- MODAL 2 : Modélisation prédictive académique -->
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('modal2')">&times;</span>
+            <h1 class="modal-title">📚 Modélisation prédictive des performances académiques</h1>
+            
+            <div class="tech-stack-modal">
+                <span class="tech-tag-modal">Python 3.10</span>
+                <span class="tech-tag-modal">Scikit-learn</span>
+                <span class="tech-tag-modal">Pandas</span>
+                <span class="tech-tag-modal">Django 4.2</span>
+                <span class="tech-tag-modal">XGBoost</span>
+                <span class="tech-tag-modal">Matplotlib</span>
+            </div>
+            
+            <div class="readme-content">
+                <h1>Projet de Prédiction des Performances Académiques</h1>
+                
+                <h2>📋 Contexte du projet</h2>
+                <p>Développement d'un système de prédiction des résultats étudiants pour aider à l'identification précoce des élèves en difficulté. Le modèle atteint une précision de 85% sur les données de test.</p>
+                
+                <h2>🎯 Objectifs</h2>
+                <ul>
+                    <li>Prédire les résultats finaux des étudiants (réussite/échec)</li>
+                    <li>Identifier les facteurs clés de réussite</li>
+                    <li>Créer un outil d'alerte précoce pour les enseignants</li>
+                    <li>Visualiser les tendances par classe et matière</li>
+                </ul>
+                
+                <h2>🛠️ Pipeline de machine learning</h2>
+                <pre>
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, classification_report
+import xgboost as xgb
+
+# 1. Chargement des données
+df = pd.read_csv('student_performance.csv')
+
+# 2. Prétraitement
+# Encodage des variables catégorielles
+le = LabelEncoder()
+df['sexe'] = le.fit_transform(df['sexe'])
+df['parents_education'] = le.fit_transform(df['parents_education'])
+
+# 3. Séparation features/target
+X = df.drop('resultat_final', axis=1)
+y = df['resultat_final']
+
+# 4. Split train/test
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# 5. Normalisation
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# 6. Entraînement du modèle
+model = xgb.XGBClassifier(
+    n_estimators=100,
+    max_depth=6,
+    learning_rate=0.1,
+    random_state=42
+)
+model.fit(X_train_scaled, y_train)
+
+# 7. Évaluation
+y_pred = model.predict(X_test_scaled)
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Précision du modèle: {accuracy:.2f}")
+print("\nRapport de classification:")
+print(classification_report(y_test, y_pred))
+
+# 8. Importance des features
+feature_importance = pd.DataFrame({
+    'feature': X.columns,
+    'importance': model.feature_importances_
+}).sort_values('importance', ascending=False)
+                </pre>
+                
+                <h2>📊 Résultats</h2>
+                <ul>
+                    <li><strong>Précision globale</strong> : 85%</li>
+                    <li><strong>Facteurs les plus importants</strong> : notes précédentes, assiduité, niveau d'éducation des parents</li>
+                    <li><strong>Interface Django</strong> permettant aux enseignants de visualiser les prédictions</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- MODAL 3 : Étude du trafic routier -->
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('modal3')">&times;</span>
+            <h1 class="modal-title">🚦 Étude du trafic routier à Dakar</h1>
+            
+            <div class="tech-stack-modal">
+                <span class="tech-tag-modal">Python</span>
+                <span class="tech-tag-modal">Pandas</span>
+                <span class="tech-tag-modal">Matplotlib</span>
+                <span class="tech-tag-modal">Django</span>
+                <span class="tech-tag-modal">Folium</span>
+            </div>
+            
+            <div class="readme-content">
+                <h1>Analyse et Optimisation du Trafic Routier</h1>
+                
+                <h2>📋 Contexte</h2>
+                <p>Étude des données de trafic à Dakar pour identifier les heures de pointe, les goulots d'étranglement et proposer des solutions d'optimisation des flux.</p>
+                
+                <h2>🎯 Réalisations</h2>
+                <ul>
+                    <li>Analyse de 1 million+ de points de données de trafic</li>
+                    <li>Identification des 5 principaux goulots d'étranglement</li>
+                    <li>Proposition de 3 scénarios d'optimisation</li>
+                    <li>Dashboard interactif de visualisation</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- MODAL 4 : Prévision épidémiologique -->
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('modal4')">&times;</span>
+            <h1 class="modal-title">🦠 Prévision épidémiologique</h1>
+            
+            <div class="tech-stack-modal">
+                <span class="tech-tag-modal">Python</span>
+                <span class="tech-tag-modal">ARIMA</span>
+                <span class="tech-tag-modal">LSTM</span>
+                <span class="tech-tag-modal">Django</span>
+                <span class="tech-tag-modal">Chart.js</span>
+            </div>
+            
+            <div class="readme-content">
+                <h1>Modélisation et Prévision Épidémiologique</h1>
+                
+                <h2>📋 Contexte</h2>
+                <p>Développement de modèles de séries temporelles pour prédire l'évolution des cas épidémiques, avec interface de visualisation Django.</p>
+                
+                <h2>🎯 Technologies utilisées</h2>
+                <ul>
+                    <li><strong>ARIMA</strong> : Modèles statistiques classiques</li>
+                    <li><strong>LSTM</strong> : Réseaux de neurones récurrents</li>
+                    <li><strong>Django</strong> : Dashboard interactif</li>
+                    <li><strong>Chart.js</strong> : Visualisations dynamiques</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Fonction pour ouvrir une modal
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+            document.body.style.overflow = "hidden"; // Empêche le scroll en arrière-plan
+        }
+        
+        // Fonction pour fermer une modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+            document.body.style.overflow = "auto"; // Réactive le scroll
+        }
+        
+        // Fermer la modal si on clique en dehors
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        }
+        
+        // Fermer avec la touche Echap
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                let modals = document.getElementsByClassName('modal');
+                for (let modal of modals) {
+                    if (modal.style.display === "block") {
+                        modal.style.display = "none";
+                        document.body.style.overflow = "auto";
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>
