@@ -253,20 +253,6 @@
             padding: 30px 0;
         }
         
-        /* QR Code section */
-        .qr-section {
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            text-align: center;
-            margin: 40px 0;
-        }
-        
-        #qrcode {
-            margin: 20px auto;
-            max-width: 200px;
-        }
-        
         /* Responsive */
         @media (max-width: 768px) {
             header h1 { font-size: 2em; }
@@ -274,8 +260,6 @@
             nav ul li { margin: 10px 0; }
         }
     </style>
-    <!-- Bibliothèque pour QR Code -->
-    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 </head>
 <body>
     <header>
@@ -472,19 +456,6 @@
         </div>
     </section>
     
-    <section id="qr-code">
-        <div class="container">
-            <div class="qr-section">
-                <h2>Mon portfolio</h2>
-                <p>Scannez ce QR code pour voir mon portfolio en ligne</p>
-                <div id="qrcode"></div>
-                <p style="margin-top: 20px; font-size: 0.9em; color: #666;">
-                    <a href="#" id="portfolio-link">https://ibra-fall-portfolio.com</a>
-                </p>
-            </div>
-        </div>
-    </section>
-    
     <section id="contact">
         <div class="container">
             <h2>Contact</h2>
@@ -510,23 +481,5 @@
             <p>&copy; 2026 Ibra Fall - Développeur Python/Django. Tous droits réservés.</p>
         </div>
     </footer>
-    
-    <script>
-        // Générer le QR code avec l'URL du portfolio
-        // Remplacez cette URL par l'adresse où sera hébergé votre portfolio
-        const portfolioUrl = "https://ibra-fall-portfolio.com";
-        
-        new QRCode(document.getElementById("qrcode"), {
-            text: portfolioUrl,
-            width: 200,
-            height: 200,
-            colorDark: "#667eea",
-            colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.H
-        });
-        
-        document.getElementById("portfolio-link").href = portfolioUrl;
-        document.getElementById("portfolio-link").textContent = portfolioUrl;
-    </script>
 </body>
 </html>
