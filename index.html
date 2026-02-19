@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ibra Fall - Portfolio Développeur Python/Django</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        /* Navigation */
+        nav {
+            background: #333;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #667eea;
+        }
+        
+        /* Sections */
+        section {
+            padding: 60px 0;
+        }
+        
+        section:nth-child(even) {
+            background: white;
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2em;
+            color: #333;
+        }
+        
+        /* À propos */
+        .about-content {
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        
+        /* Projets */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .project-content {
+            padding: 20px;
+        }
+        
+        .project-title {
+            font-size: 1.3em;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+        
+        .tech-tag {
+            background: #e0e7ff;
+            color: #667eea;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+        
+        .project-desc {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.95em;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .project-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+        
+        /* Compétences */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            margin: auto;
+        }
+        
+        .skill-category {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .skill-category h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .skill-category ul {
+            list-style: none;
+        }
+        
+        .skill-category li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .skill-category li::before {
+            content: "▹";
+            color: #667eea;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Formation */
+        .timeline {
+            max-width: 600px;
+            margin: auto;
+        }
+        
+        .timeline-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-date {
+            color: #667eea;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-subtitle {
+            color: #666;
+            font-size: 0.95em;
+        }
+        
+        /* Contact */
+        .contact-info {
+            text-align: center;
+            max-width: 500px;
+            margin: auto;
+        }
+        
+        .contact-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        /* QR Code section */
+        .qr-section {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        #qrcode {
+            margin: 20px auto;
+            max-width: 200px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2em; }
+            nav ul { flex-direction: column; align-items: center; }
+            nav ul li { margin: 10px 0; }
+        }
+    </style>
+    <!-- Bibliothèque pour QR Code -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Ibra Fall</h1>
+            <p>Développeur Python / Django | Data Analyst</p>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#about">À propos</a></li>
+            <li><a href="#projects">Projets</a></li>
+            <li><a href="#skills">Compétences</a></li>
+            <li><a href="#education">Formation</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <section id="about">
+        <div class="container">
+            <h2>À propos de moi</h2>
+            <div class="about-content">
+                <p>Étudiant en informatique, je combine des compétences techniques solides (Python/Django, data analysis) avec d'excellentes capacités relationnelles. Rigoureux et autonome, je m'investis pleinement dans les projets d'équipe où mon esprit collaboratif et ma solidarité contribuent à créer une dynamique positive. Ma curiosité naturelle me pousse à constamment explorer de nouvelles technologies et à proposer des solutions innovantes face aux défis techniques.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="projects">
+        <div class="container">
+            <h2>Mes Projets</h2>
+            
+            <!-- Projet professionnel -->
+            <div class="project-card" style="margin-bottom: 30px;">
+                <div class="project-content">
+                    <div class="project-title">Teranga Market - E-commerce</div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Bootstrap</span>
+                    </div>
+                    <div class="project-desc">
+                        Développement d'une plateforme e-commerce complète avec intégration de paiement, gestion de panier en temps réel et tableau de bord administrateur. Optimisation des performances et réduction des temps de chargement de 40%.
+                    </div>
+                    <div class="project-links">
+                        <a href="#">Voir sur GitHub →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Grille des projets académiques -->
+            <div class="projects-grid">
+                <!-- Projet 1 -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-title">Analyse des ventes & Optimisation des stocks</div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Pandas</span>
+                            <span class="tech-tag">NumPy</span>
+                            <span class="tech-tag">Django</span>
+                        </div>
+                        <div class="project-desc">
+                            Analyse de 50 000+ transactions avec Pandas/NumPy. Création d'algorithmes de réapprovisionnement automatique sous Django. Réduction des ruptures de stock de 25%.
+                        </div>
+                        <div class="project-links">
+                            <a href="#">Détails →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projet 2 -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-title">Modélisation prédictive académique</div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Scikit-learn</span>
+                            <span class="tech-tag">Django</span>
+                        </div>
+                        <div class="project-desc">
+                            Modèles ML pour prédire les résultats étudiants avec 85% de précision. Interface de visualisation Django pour l'exploration des prédictions.
+                        </div>
+                        <div class="project-links">
+                            <a href="#">Détails →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projet 3 -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-title">Étude du trafic routier</div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Pandas</span>
+                            <span class="tech-tag">Matplotlib</span>
+                            <span class="tech-tag">Django</span>
+                        </div>
+                        <div class="project-desc">
+                            Analyse statistique des données de trafic à Dakar. Identification des goulots d'étranglement et proposition d'optimisation des flux via Django.
+                        </div>
+                        <div class="project-links">
+                            <a href="#">Détails →</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Projet 4 -->
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-title">Prévision épidémiologique</div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">ARIMA</span>
+                            <span class="tech-tag">LSTM</span>
+                            <span class="tech-tag">Django</span>
+                        </div>
+                        <div class="project-desc">
+                            Modélisation de séries temporelles avec ARIMA et LSTM. Dashboard interactif Django avec Chart.js pour le suivi des prévisions.
+                        </div>
+                        <div class="project-links">
+                            <a href="#">Détails →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="skills">
+        <div class="container">
+            <h2>Compétences techniques</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Langages</h3>
+                    <ul>
+                        <li>Python</li>
+                        <li>JavaScript</li>
+                        <li>HTML5 / CSS3</li>
+                        <li>SQL</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Frameworks & Outils</h3>
+                    <ul>
+                        <li>Django / Django REST</li>
+                        <li>Git / GitHub</li>
+                        <li>WordPress</li>
+                        <li>Bootstrap</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Data Science</h3>
+                    <ul>
+                        <li>Pandas / NumPy</li>
+                        <li>Scikit-learn</li>
+                        <li>Matplotlib / Seaborn</li>
+                        <li>ARIMA / LSTM</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Bases de données</h3>
+                    <ul>
+                        <li>PostgreSQL</li>
+                        <li>MySQL</li>
+                        <li>SQLite</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="education">
+        <div class="container">
+            <h2>Formation</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2023 - 2026</div>
+                    <div class="timeline-title">Licence 3 en Informatique et Sciences des Données</div>
+                    <div class="timeline-subtitle">BEM TECH, Dakar - En cours</div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">2022 - 2023</div>
+                    <div class="timeline-title">Baccalauréat (Mention Assez Bien)</div>
+                    <div class="timeline-subtitle">Sacré-Cœur, Dakar</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="qr-code">
+        <div class="container">
+            <div class="qr-section">
+                <h2>Mon portfolio</h2>
+                <p>Scannez ce QR code pour voir mon portfolio en ligne</p>
+                <div id="qrcode"></div>
+                <p style="margin-top: 20px; font-size: 0.9em; color: #666;">
+                    <a href="#" id="portfolio-link">https://ibra-fall-portfolio.com</a>
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <div class="container">
+            <h2>Contact</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    📍 Virage 16, Dakar, Sénégal
+                </div>
+                <div class="contact-item">
+                    📞 77 734 12 86
+                </div>
+                <div class="contact-item">
+                    ✉️ fall-3950193@bemtech.sn
+                </div>
+                <div class="contact-item">
+                    🔗 <a href="https://www.linkedin.com/in/ibra-fall-99a2192a4/" style="color: #667eea;">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Ibra Fall - Développeur Python/Django. Tous droits réservés.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Générer le QR code avec l'URL du portfolio
+        // Remplacez cette URL par l'adresse où sera hébergé votre portfolio
+        const portfolioUrl = "https://ibra-fall-portfolio.com";
+        
+        new QRCode(document.getElementById("qrcode"), {
+            text: portfolioUrl,
+            width: 200,
+            height: 200,
+            colorDark: "#667eea",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+        
+        document.getElementById("portfolio-link").href = portfolioUrl;
+        document.getElementById("portfolio-link").textContent = portfolioUrl;
+    </script>
+</body>
+</html>
